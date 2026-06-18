@@ -166,7 +166,7 @@ namespace Impulseplanter
                            $"pad={width}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1";
             }
 
-            string args = $"-loop 1 -r 1 -i \"{selectedImagePath}\" -i \"{selectedAudioPath}\" " +
+            string args = $"-y -loop 1 -r 1 -i \"{selectedImagePath}\" -i \"{selectedAudioPath}\" " +
                           $"-vf \"{vfFilter}\" -c:v libx264 -tune stillimage -c:a aac -shortest \"{outputPath}\"";
 
             try
