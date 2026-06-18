@@ -41,7 +41,9 @@ namespace Impulseplanter
         {
             OpenFileDialog ofd = new()
             {
-                Filter = "Image Files|*.png;*.jpg;*.jpeg;*.bmp;*.gif",
+                Filter =
+                    "Image Files|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.webp;*.tif;*.tiff;*.tga;*.ico;*.ppm;*.pgm;*.pbm;*.pnm;*.dds;*.exr;*.hdr;*.jxl;*.heic;*.heif;*.avif|" +
+                    "All Files|*.*",
                 Title = "Select an image"
             };
 
