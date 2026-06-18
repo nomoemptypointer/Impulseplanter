@@ -56,9 +56,11 @@ namespace Impulseplanter
         // Select Audio
         private void SelectAudioButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog
+            OpenFileDialog ofd = new()
             {
-                Filter = "Audio Files|*.mp3;*.wav;*.aac;*.flac",
+                Filter =
+                    "Audio Files|*.mp3;*.wav;*.aac;*.m4a;*.flac;*.ogg;*.opus;*.wma;*.aiff;*.aif;*.alac;*.ape;*.mp2;*.mp1;*.ac3;*.eac3;*.amr;*.au;*.ra;*.rm;*.mid;*.midi;*.mka;*.caf;*.tta;*.wv;*.spx;*.dts;*.dsf;*.dff;*.tak;*.mpc;*.pcm;*.snd;*.3gp;*.webm|" +
+                    "All Files|*.*",
                 Title = "Select an audio file"
             };
 
