@@ -167,7 +167,7 @@ namespace Impulseplanter
             }
 
             string args = $"-y -loop 1 -r 5 -i \"{selectedImagePath}\" -i \"{selectedAudioPath}\" " +
-                          $"-vf \"{vfFilter}\" -c:v libx264 -preset ultrafast -crf 35 -tune stillimage -c:a aac -shortest \"{outputPath}\"";
+                          $"-vf \"{vfFilter}\" -c:v libx264 -pix_fmt yuv420p -preset ultrafast -crf 35 -tune stillimage -c:a aac -shortest \"{outputPath}\"";
 
             try
             {
