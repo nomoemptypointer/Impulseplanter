@@ -166,7 +166,7 @@ namespace Impulseplanter
                            $"pad={width}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1";
             }
 
-            string args = $"-y -loop 1 -r 1 -i \"{selectedImagePath}\" -i \"{selectedAudioPath}\" " +
+            string args = $"-y -loop 1 -r 10 -i \"{selectedImagePath}\" -i \"{selectedAudioPath}\" " +
                           $"-vf \"{vfFilter}\" -c:v libx264 -tune stillimage -c:a aac -shortest \"{outputPath}\"";
 
             try
@@ -178,19 +178,26 @@ namespace Impulseplanter
                         FileName = "ffmpeg",
                         Arguments = args,
                         UseShellExecute = false,
-                        CreateNoWindow = false, // show console window
+#if DEBUG
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+
+                        CreateNoWindow = true // better for debugging
+#else
+                        CreateNoWindow = false // show console in release for better user feedback
+#endif
                     };
 
                     using var ffmpeg = Process.Start(psi);
 
-                    // Optionally, read output asynchronously
-                    //ffmpeg.OutputDataReceived += (s, e) => { if (e.Data != null) Debug.WriteLine(e.Data); };
-                    //ffmpeg.ErrorDataReceived += (s, e) => { if (e.Data != null) Debug.WriteLine(e.Data); };
-
-                    //ffmpeg.BeginOutputReadLine();
-                    //ffmpeg.BeginErrorReadLine();
-
+#if DEBUG
+                    ffmpeg.OutputDataReceived += (s, e) => { if (e.Data != null) Debug.WriteLine(e.Data); };
+                    ffmpeg.ErrorDataReceived += (s, e) => { if (e.Data != null) Debug.WriteLine(e.Data); };
+                    ffmpeg.BeginOutputReadLine();
+                    ffmpeg.BeginErrorReadLine();
+#endif
                     ffmpeg.WaitForExit();
+
                 });
 
                 MessageBox.Show($"Video generated: {outputPath}", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
